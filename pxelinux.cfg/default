@@ -24,12 +24,12 @@ LABEL netboot.xyz
 
 LABEL Focal 
     MENU LABEL Ubuntu Focal Fossa
-    kernel vesamenu.c32
-    append ubuntu_focal.cfg
-#    kernel ubuntu/focal/casper/vmlinuz
-    #INITRD ubuntu/focal/initrd
-#    append initrd=ubuntu/focal/casper/initrd boot=casper netboot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/focal/ splash toram ---
-#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=
+#    kernel vesamenu.c32
+#    append ubuntu_focal.cfg
+    kernel ubuntu/focal/casper/vmlinuz
+    INITRD ubuntu/focal/casper/initrd
+    append initrd=ubuntu/focal/casper/initrd boot=casper netboot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/focal/ splash toram ---
+#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.10-live-server-amd64.iso
 
 LABEL Bionic
 # Works!
