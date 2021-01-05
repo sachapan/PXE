@@ -3,10 +3,23 @@ DEFAULT vesamenu.c32
 UI vesamenu.c32
 #DEFAULT menu.c32
 #MENU RESOLUTION 10.125 768
+#MENU COLOR screen      80ffffff #00000000 std      # background colour not covered by the splash image
+#MENU COLOR border      ffffffff #ee000000 std      # The wire-frame border
+#MENU COLOR title       ffff3f7f #ee000000 std      # Menu title text
+#MENU COLOR sel         ff00dfdf #ee000000 std      # Selected menu option
+#MENU COLOR hotsel      ff7f7fff #ee000000 std      # The selected hotkey (set with ^ in MENU LABEL)
+#MENU COLOR unsel       ffffffff #ee000000 std      # Unselected menu options
+#MENU COLOR hotkey      ff7f7fff #ee000000 std      # Unselected hotkeys (set with ^ in MENU LABEL)
+#MENU COLOR tabmsg      c07f7fff #00000000 std      # Tab text
+#MENU COLOR timeout_msg 8000dfdf #00000000 std      # Timout text
+#MENU COLOR timeout     c0ff3f7f #00000000 std      # Timout counter
+#MENU COLOR disabled    807f7f7f #ee000000 std      # Disabled menu options, including SEPARATORs
+#MENU COLOR cmdmark     c000ffff #ee000000 std      # Command line marker - The '> ' on the left when editing an option
+#MENU COLOR cmdline     c0ffffff #ee000000 std      # Command line - The text being edited
 
-#menu background images/guitar.jpg
+menu background images/guitar.jpg
 #menu background images/fender_neck_closeup.png
-menu background images/ford_galaxie.png
+#menu background images/ford_galaxie.png
 #menu background images/old_boots_10.125.png
 #menu background images/old_boots_1024.png
 
@@ -52,35 +65,30 @@ LABEL Debian Etch
 	append pxelinux.cfg/debian_etch.cfg
 
 LABEL Fedora Server
-    MENU LABEL Fedora 
+    MENU LABEL Fedora Server
     kernel fedora/33/images/pxeboot/vmlinuz
     append initrd=fedora/33/images/pxeboot/initrd.img inst.repo=http://dl.fedoraproject.org/pub/fedora/linux/releases/33/Server/x86_64/os
 
-LABEL Fedora Workstation
-    MENU LABEL Fedora 
+LABEL Fedora Workstation 
+    MENU LABEL Fedora Workstation
     kernel fedora/33/images/pxeboot/vmlinuz
-    append initrd=fedora/33/images/pxeboot/initrd.img inst.repo=http://dl.fedoraproject.org/pub/fedora/linux/releases/33/Workstation/x86_64/os
+    append initrd=fedora/33/images/pxeboot/initrd.img root=live:http://10.0.0.6/tftp/fedora/33/Workstation/LiveOS/squashfs.img
 
-LABEL Fedora Sample
-    MENU LABEL Fedora sample
-    kernel fedora/images/pxeboot/vmlinuz
-    append initrd=fedora/images/pxeboot/initrd.img
-    repo=http://dl.fedoraproject.org/pub/fedora/linux/releases/20/Fedora/x86_64/os/
 
 LABEL GParted Live
     MENU LABEL Gparted Live 1.1
     kernel gparted/live/vmlinuz
     append initrd=gparted/live/initrd.img boot=live config components union=overlay user=user noswap noeject ip= vga=788 fetch=http://10.0.0.6/tftp/gparted/live/filesystem.squashfs
 
-LABEL knoppix_6.7
-	MENU LABEL Knoppix 6.7 
-	kernel knoppix/6.7/linux
-	append nfsdir=10.0.0.6:/var/tftp/knoppix/6.7/ nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/6.7/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
+#LABEL knoppix_6.7
+#	MENU LABEL Knoppix 6.7 
+#	kernel knoppix/6.7/linux
+#	append nfsdir=10.0.0.6:/var/tftp/knoppix/6.7/ nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/6.7/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
 
-LABEL knoppix_8.6
-	MENU LABEL Knoppix 8.6 
-	kernel knoppix/8.6/boot/isolinx/linux
-	append nfsdir=10.0.0.6:/var/tftp/knoppix/8.6/ nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/8.6/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
+#LABEL knoppix_8.6
+#	MENU LABEL Knoppix 8.6 
+#	kernel knoppix/8.6/boot/isolinx/linux
+#	append nfsdir=10.0.0.6:/var/tftp/knoppix/8.6/ nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/8.6/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
 #LABEL knoppix_5.1.1
 #	MENU LABEL Knoppix 5.1.1
 #	kernel knoppix/5.1.1/vmlinuz
@@ -111,10 +119,10 @@ LABEL pxeknife
 	append pxeknife/pxeknife.conf
 
 # Not currently working April 17, 2020
-LABEL centos
-	MENU LABEL Centos 8.1
-	kernel centos/8.1/vmlinuz
-	append ks initrd=centos/8.1/initrd.img ramdisk_size=100000 ip=dhcp url --url http://mirror.csclub.uwaterloo.ca/centos/8.1.1911/ 
+#LABEL centos
+#	MENU LABEL Centos 8.1
+#	kernel centos/8.1/vmlinuz
+#	append ks initrd=centos/8.1/initrd.img ramdisk_size=100000 ip=dhcp url --url http://mirror.csclub.uwaterloo.ca/centos/8.1.1911/ 
 
 LABEL dsl_4.0
 	MENU LABEL Damn Small Linux 4.0
