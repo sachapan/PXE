@@ -31,20 +31,32 @@ LABEL reboot
     MENU LABEL Reboot
     COM32 reboot.c32
 
-LABEL netboot.xyz
-    MENU LABEL netboot.xyz
-    kernel netboot.xyz.kpxe
+#LABEL netboot.xyz
+#    MENU LABEL netboot.xyz
+#    kernel netboot.xyz.kpxe
 
-LABEL Focal 
-    MENU LABEL Ubuntu Focal Fossa
-#    kernel vesamenu.c32
-#    append ubuntu_focal.cfg
-    kernel ubuntu/focal/casper/vmlinuz
-    INITRD ubuntu/focal/casper/initrd
-#    append initrd=ubuntu/focal/casper/initrd ip=dhcp boot=casper netboot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/mini.iso splash toram ---
-    append initrd=ubuntu/focal/casper/initrd ip=dhcp boot=casper boot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/focal/ splash toram ---
-    #append initrd=ubuntu/focal/casper/initrd ip=dhcp boot=casper netboot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/focal/ splash toram ---
-#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.10-live-server-amd64.iso
+LABEL ubuntu 20.04 LTS Focal Workstation
+# Works January 23, 2021
+    MENU LABEL Ubuntu Workstation 20.04 LTS
+    kernel ubuntu/focal/vmlinuz
+    initrd ubuntu/focal/initrd
+    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.04.1-desktop-amd64.iso
+
+LABEL ubuntu 20.04 LTS Focal Server
+    MENU LABEL Ubuntu Server 20.04 LTS
+    kernel ubuntu/server/20.04/vmlinuz
+    initrd ubuntu/server/20.04/initrd
+    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.04.1-live-server-amd64.iso
+
+LABEL Xubuntu 20.04 Workstation
+# Testing Jan 24, 2021
+# Passed
+    MENU LABEL Xubuntu 20.04 Workstation
+    kernel xubuntu/casper/vmlinuz
+    initrd xubuntu/casper/initrd
+    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/xubuntu-20.04.1-desktop-amd64.iso splash
+#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp nfsroot=10.0.0.6/tftp/xubuntu/ splash
+#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/
 
 LABEL Bionic
 # Works!
