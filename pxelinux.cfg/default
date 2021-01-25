@@ -55,6 +55,12 @@ LABEL Xubuntu 20.04 Workstation
     initrd xubuntu/casper/initrd
     append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/xubuntu-20.04.1-desktop-amd64.iso splash
 
+LABEL Ubuntu MATE i386 18.04
+    MENU LABEL Ubuntu MATE i386 18.04
+    kernel ubuntu/i386/mate/casper/vmlinuz
+    initrd ubuntu/i386/mate/casper/initrd
+    append boot=casper netboot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/i386/mate
+
 LABEL Debian Buster
 # Broken
 	MENU LABEL Debian Buster Options
@@ -68,15 +74,16 @@ LABEL Debian Etch
 	append pxelinux.cfg/debian_etch.cfg
 
 LABEL Fedora Server
+# Nope
     MENU LABEL Fedora Server
     kernel fedora/33/images/pxeboot/vmlinuz
     append initrd=fedora/33/images/pxeboot/initrd.img inst.repo=http://dl.fedoraproject.org/pub/fedora/linux/releases/33/Server/x86_64/os
 
 LABEL Fedora Workstation 
+# Nope
     MENU LABEL Fedora Workstation
     kernel fedora/33/images/pxeboot/vmlinuz
     append initrd=fedora/33/images/pxeboot/initrd.img root=live:http://10.0.0.6/tftp/fedora/33/Workstation/LiveOS/squashfs.img
-
 
 LABEL GParted Live
     MENU LABEL Gparted Live 1.1
@@ -96,6 +103,7 @@ LABEL sysrescue
     SYSAPPEND 3
 
 LABEL archlinux
+# Testing January 25, 2021
     MENU LABEL archlinux
     COM32 archlinux/pxechn.c32
     APPEND archlinux/ipxe.31e77c156b6d.pxe
@@ -105,20 +113,10 @@ LABEL pxeknife
 	kernel vesamenu.c32
 	append pxeknife/pxeknife.conf
 
-# Not currently working April 17, 2020
-#LABEL centos
-#	MENU LABEL Centos 8.1
-#	kernel centos/8.1/vmlinuz
-#	append ks initrd=centos/8.1/initrd.img ramdisk_size=100000 ip=dhcp url --url http://mirror.csclub.uwaterloo.ca/centos/8.1.1911/ 
-
 LABEL dsl_4.0
 	MENU LABEL Damn Small Linux 4.0
 	kernel dsl/linux24
 	append ramdisk_size=100000 lang=us apm=power-off vga=789 initrd=dsl/minirt24.gz nomce noapic quiet BOOT_IMAGE=KNOPPIX/KNOPPIX frominitrd
-
-LABEL memtest
-	MENU LABEL Memtest
-	kernel knoppix/6.7/boot/isolinux/memtest
 
 LABEL g4l
 	MENU LABEL Ghost 4 Linux
