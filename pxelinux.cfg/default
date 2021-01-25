@@ -1,4 +1,4 @@
-MENU TITLE ---== Home PXE Boot Options ==---
+MENU TITLE ---== Home Sweet Home PXE Boot Options ==---
 DEFAULT vesamenu.c32
 UI vesamenu.c32
 #DEFAULT menu.c32
@@ -31,19 +31,18 @@ LABEL reboot
     MENU LABEL Reboot
     COM32 reboot.c32
 
-#LABEL netboot.xyz
-#    MENU LABEL netboot.xyz
-#    kernel netboot.xyz.kpxe
+LABEL Ubuntu 20.04 LTS Focal Workstation
+# Testing January 23, 2021
+# Passed
+    MENU LABEL Ubuntu 20.04 LTS Workstation
+    kernel ubuntu/workstation/20.04/vmlinuz
+    initrd ubuntu/workstation/20.04/initrd
+    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.04.1-desktop-amd64.iso splash
 
-LABEL ubuntu 20.04 LTS Focal Workstation
-# Works January 23, 2021
-    MENU LABEL Ubuntu Workstation 20.04 LTS
-    kernel ubuntu/focal/vmlinuz
-    initrd ubuntu/focal/initrd
-    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.04.1-desktop-amd64.iso
-
-LABEL ubuntu 20.04 LTS Focal Server
-    MENU LABEL Ubuntu Server 20.04 LTS
+LABEL Ubuntu 20.04 LTS Focal Server
+# Testing Janaru 25, 2021
+# Passed
+    MENU LABEL Ubuntu 20.04 LTS Server
     kernel ubuntu/server/20.04/vmlinuz
     initrd ubuntu/server/20.04/initrd
     append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/ubuntu-20.04.1-live-server-amd64.iso
@@ -51,18 +50,10 @@ LABEL ubuntu 20.04 LTS Focal Server
 LABEL Xubuntu 20.04 Workstation
 # Testing Jan 24, 2021
 # Passed
-    MENU LABEL Xubuntu 20.04 Workstation
+    MENU LABEL Xubuntu 20.04 LTS Workstation
     kernel xubuntu/casper/vmlinuz
     initrd xubuntu/casper/initrd
     append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/xubuntu-20.04.1-desktop-amd64.iso splash
-#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp nfsroot=10.0.0.6/tftp/xubuntu/ splash
-#    append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/
-
-LABEL Bionic
-# Works!
-    MENU LABEL Ubuntu Bionic Beaver
-    kernel ubuntu/bionic/casper/vmlinuz
-    append initrd=ubuntu/bionic/casper/initrd boot=casper netboot=nfs nfsroot=10.0.0.6:/var/tftp/ubuntu/bionic/ splash toram ---
 
 LABEL Debian Buster
 # Broken
@@ -92,25 +83,9 @@ LABEL GParted Live
     kernel gparted/live/vmlinuz
     append initrd=gparted/live/initrd.img boot=live config components union=overlay user=user noswap noeject ip= vga=788 fetch=http://10.0.0.6/tftp/gparted/live/filesystem.squashfs
 
-#LABEL knoppix_6.7
-#	MENU LABEL Knoppix 6.7 
-#	kernel knoppix/6.7/linux
-#	append nfsdir=10.0.0.6:/var/tftp/knoppix/6.7/ nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/6.7/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
-
-#LABEL knoppix_8.6
-#	MENU LABEL Knoppix 8.6 
-#	kernel knoppix/8.6/boot/isolinx/linux
-#	append nfsdir=10.0.0.6:/var/tftp/knoppix/8.6/ nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/8.6/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
-#LABEL knoppix_5.1.1
-#	MENU LABEL Knoppix 5.1.1
-#	kernel knoppix/5.1.1/vmlinuz
-#	append nfsdir=10.0.0.125:/var/tftp/knoppix/5.1.1 nodhcp lang=us ramdisk_size=100000 init=/etc/init apm=power-off nomce vga=791 initrd=knoppix/5.1.1/miniroot.gz quiet BOOT_IMAGE=KNOPPIX/KNOPPIX
-
 LABEL clonezilla
 	MENU LABEL Clonezilla
 	kernel clonezilla/live/vmlinuz
-#	append initrd=clonezilla/initrd.img boot=live union-aufs netboot=nfs nfsroot=10.0.0.125:/var/tftp/clonezilla
-#	append initrd=clonezilla/initrd.img boot=live union=aufs noswap noprompt vga=788 fetch=tftp://10.0.0.125/tftp/clonezilla/filesystem.squashfs netboot=nfs nfsroot=10.0.0.125:/var/tftp/clonezilla
 	APPEND initrd=clonezilla/live/initrd.img boot=live config noswap nolocales edd=on nomodeset ocs_live_run="ocs-live-general" ocs_live_extra_param="" ocs_live_keymap="" ocs_live_batch="no" ocs_lang="" vga=788 nosplash noprompt fetch=http://10.0.0.6/tftp/clonezilla/live/filesystem.squashfs
 
 LABEL sysrescue
@@ -182,3 +157,6 @@ TIMEOUT 0
 #	kernel vesamenu.c32
 #	append pxelinux.cfg/ubuntu_precise.cfg
 
+#LABEL netboot.xyz
+#    MENU LABEL netboot.xyz
+#    kernel netboot.xyz.kpxe
