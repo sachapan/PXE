@@ -56,6 +56,8 @@ LABEL Xubuntu 20.04 Workstation
     append root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://10.0.0.6/tftp/ubuntu/xubuntu-20.04.1-desktop-amd64.iso splash
 
 LABEL Ubuntu MATE i386 18.04
+# Testing Janaru 25, 2021
+# Passed
     MENU LABEL Ubuntu MATE i386 18.04
     kernel ubuntu/i386/mate/casper/vmlinuz
     initrd ubuntu/i386/mate/casper/initrd
@@ -104,6 +106,7 @@ LABEL sysrescue
 
 LABEL archlinux
 # Testing January 25, 2021
+# nope
     MENU LABEL archlinux
     COM32 archlinux/pxechn.c32
     APPEND archlinux/ipxe.31e77c156b6d.pxe
